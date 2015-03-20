@@ -1,0 +1,17 @@
+{
+    "contents" : "filename<-function(date=Sys.time()){            # 文件根据日期来命名\n       paste(format(date, \"%Y%m%d\"),\".csv\",sep=\"\")\n   }\n\nloadDate<-function(date){                       # 读取城市列表，调用爬虫函数，合并数据保存到一个文件中。\n       print(paste('Date','==>',date))\n       city<-read.csv(file=\"WOEID.csv\",header=FALSE,fileEncoding=\"utf-8\", encoding=\"utf-8\")  # 加载城市列表\n       names(city)<-c(\"en\",\"woeid\",\"zh\",'prov','long','lat')\n       city<-city[-nrow(city),]\n  \n         wdata<-do.call(rbind, lapply(city$woeid,getWeather))\n       w<-cbind(city,wdata)\n       write.csv(w,file=filename(date),row.names=FALSE,fileEncoding=\"utf-8\")\n   }",
+    "created" : 1426840970960.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "409591751",
+    "id" : "D7CD5471",
+    "lastKnownWriteTime" : 1426843849,
+    "path" : "D:/Project/RCurl/WeatherData.R",
+    "project_path" : "WeatherData.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

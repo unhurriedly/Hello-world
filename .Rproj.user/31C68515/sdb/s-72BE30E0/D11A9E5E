@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1426844420399.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D11A9E5E",
+    "lastKnownWriteTime" : 27303364806049904,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "WOEID",
+        "contentUrl" : "content?title=WOEID&file=87fa852ae06746338070b86d499f4675.htm",
+        "displayedObservations" : "34",
+        "displayedVariables" : 1,
+        "totalObservations" : "34",
+        "variables" : "6"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

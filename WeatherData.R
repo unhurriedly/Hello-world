@@ -4,7 +4,7 @@ filename<-function(date=Sys.time()){            # 文件根据日期来命名
 
 loadDate<-function(date){                       # 读取城市列表，调用爬虫函数，合并数据保存到一个文件中。
        print(paste('Date','==>',date))
-       city<-read.csv(file="WOEID.csv",header=FALSE,fileEncoding="utf-8", encoding="utf-8")  # 加载城市列表
+       city <- read.csv("D:/Project/RCurl/Rproject/WOEID.txt")  # 加载城市列表
        names(city)<-c("en","woeid","zh",'prov','long','lat')
        city<-city[-nrow(city),]
   

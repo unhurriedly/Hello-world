@@ -16,3 +16,18 @@ getWeather<-function (x){
   print(paste(x,'==>',low,high,code,humidity,visibility,pressure,rising))
   cbind(low,high,code,humidity,visibility,pressure,rising)                        # 以data.frame格式返回
 }
+
+filename<-function(date=Sys.time()){            # 文件根据日期来命名
+  paste(format(date, "%Y%m%d"),".csv",sep="")
+}
+
+loadDate<-function(date){                       # 读取城市列表，调用爬虫函数，合并数据保存到一个文件中。
+  print(paste('Date','==>',date))
+  city <- WOEID  # 加载城市列表
+  names(city)<-c("en","woeid","zh",'prov','long','lat')
+  city<-city[-nrow(city),]
+  
+  wdata<-do.call(rbind, lapply(city$woeid,getWeather))
+  w<-cbind(city,wdata)
+  write.csv(w,file=filename(date),row.names=FALSE,fileEncoding="utf-8")
+}

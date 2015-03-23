@@ -1,13 +1,13 @@
 {
-    "contents" : "library(RCurl)#load library and get data\nlibrary(XML)\ngetWeather<-function (x){\n  url<-paste('http://weather.yahooapis.com/forecastrss?w=',x,'&u=c',sep=\"\")       # yahoo的数据源地址\n  doc = xmlTreeParse(getURL(url),useInternal = TRUE)                              # 解析XML文档\n  ans<-getNodeSet(doc, \"//yweather:atmosphere\")\n  humidity<-as.numeric(sapply(ans, xmlGetAttr, \"humidity\"))                       # 温度\n  visibility<-as.numeric(sapply(ans, xmlGetAttr, \"visibility\"))                   # 能见度\n  pressure<-as.numeric(sapply(ans, xmlGetAttr, \"pressure\"))                       # 气压\n  rising<-as.numeric(sapply(ans, xmlGetAttr, \"rising\"))                           # 气压变动\n  ans<-getNodeSet(doc, \"//item/yweather:condition\")\n  code<-sapply(ans, xmlGetAttr, \"code\")                                           # 天气情况\n  ans<-getNodeSet(doc, \"//item/yweather:forecast[1]\")\n  low<-as.numeric(sapply(ans, xmlGetAttr, \"low\"))                                 # 最高气温\n  high<-as.numeric(sapply(ans, xmlGetAttr, \"high\"))                               # 最低气温\n  print(paste(x,'==>',low,high,code,humidity,visibility,pressure,rising))\n  cbind(low,high,code,humidity,visibility,pressure,rising)                        # 以data.frame格式返回\n}",
+    "contents" : "library(RCurl)#load library and get data\nlibrary(XML)\ngetWeather<-function (x){\n  url<-paste('http://weather.yahooapis.com/forecastrss?w=',x,'&u=c',sep=\"\")       # yahoo的数据源地址\n  doc = xmlTreeParse(getURL(url),useInternal = TRUE)                              # 解析XML文档\n  ans<-getNodeSet(doc, \"//yweather:atmosphere\")\n  humidity<-as.numeric(sapply(ans, xmlGetAttr, \"humidity\"))                       # 温度\n  visibility<-as.numeric(sapply(ans, xmlGetAttr, \"visibility\"))                   # 能见度\n  pressure<-as.numeric(sapply(ans, xmlGetAttr, \"pressure\"))                       # 气压\n  rising<-as.numeric(sapply(ans, xmlGetAttr, \"rising\"))                           # 气压变动\n  ans<-getNodeSet(doc, \"//item/yweather:condition\")\n  code<-sapply(ans, xmlGetAttr, \"code\")                                           # 天气情况\n  ans<-getNodeSet(doc, \"//item/yweather:forecast[1]\")\n  low<-as.numeric(sapply(ans, xmlGetAttr, \"low\"))                                 # 最高气温\n  high<-as.numeric(sapply(ans, xmlGetAttr, \"high\"))                               # 最低气温\n  print(paste(x,'==>',low,high,code,humidity,visibility,pressure,rising))\n  cbind(low,high,code,humidity,visibility,pressure,rising)                        # 以data.frame格式返回\n}\n\nfilename<-function(date=Sys.time()){            # 文件根据日期来命名\n  paste(format(date, \"%Y%m%d\"),\".csv\",sep=\"\")\n}\n\nloadDate<-function(date){                       # 读取城市列表，调用爬虫函数，合并数据保存到一个文件中。\n  print(paste('Date','==>',date))\n  city <- WOEID  # 加载城市列表\n  names(city)<-c(\"en\",\"woeid\",\"zh\",'prov','long','lat')\n  city<-city[-nrow(city),]\n  \n  wdata<-do.call(rbind, lapply(city$woeid,getWeather))\n  w<-cbind(city,wdata)\n  write.csv(w,file=filename(date),row.names=FALSE,fileEncoding=\"utf-8\")\n}",
     "created" : 1426835818160.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1040370322",
+    "hash" : "334779449",
     "id" : "82840962",
-    "lastKnownWriteTime" : 1426835807,
-    "path" : "D:/Project/RCurl/RCurl.R",
+    "lastKnownWriteTime" : 1427107959,
+    "path" : "D:/Project/RCurl/Rproject/RCurl.R",
     "project_path" : "RCurl.R",
     "properties" : {
         "tempName" : "Untitled1"
